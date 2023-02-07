@@ -21,7 +21,6 @@ function getCookie(name) {
     const cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {
       const cookie = cookies[i].trim();
-      // Does this cookie string begin with the name we want?
       if (cookie.substring(0, name.length + 1) === (name + "=")) {
         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
         break;
@@ -39,7 +38,8 @@ $(document).ready(function(){
             url: 'back/ajax/',
             type: 'POST',
             headers: {"X-CSRFToken": getCookie("csrftoken")},
-            data: JSON.stringify({'polygon': polygon,}), //{'name': 'Serg'},
+            data: JSON.stringify({'polygon': polygon,
+                                  'point': [100, 200]}),
             success: function(response){
                 console.log(response)
             }
