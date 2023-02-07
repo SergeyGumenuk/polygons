@@ -1,0 +1,7 @@
+.idea/
+
+__pycache__/
+
+secret_keys.py
+
+db.sqlite3

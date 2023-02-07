@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello, World!</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <div class="wrapper">
+            <div class="container">
+                <div class="canvas">
+                    <canvas width="600" height="400" id="cvs"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/jquery-1.12.0.min.js' %}"></script>
+    <script src="{% static 'js/vertices.js' %}"></script>
+</body>
+</html>
