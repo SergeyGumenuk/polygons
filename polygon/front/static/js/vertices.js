@@ -36,7 +36,6 @@ function drawPolygon() {
 
 function checkPoint() {
     canvas.addEventListener('click', sendAjax);
-//    canvas.addEventListener('click', clickToDrawPoint);
 }
 
 function sendAjax(){
@@ -91,7 +90,6 @@ function clickToDrawVertex(e){
 
 
 function clickToDrawPoint(e){
-//  console.log(e.offsetX, e.offsetY);
     canvas_context.beginPath();
     canvas_context.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI, false);
     canvas_context.fill();
