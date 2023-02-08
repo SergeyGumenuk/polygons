@@ -73,7 +73,7 @@ function ajaxToSavePolygon() {
         url: 'back/polygon/save/',
         type: 'POST',
         headers: {"X-CSRFToken": getCookie("csrftoken")},
-        data: JSON.stringify({'polygon_vertices': polygon,
+        data: JSON.stringify({'polygon': {'vertices': polygon},
                               'img': image}),
         success: function(response){
             alert(response['status'])
