@@ -27,14 +27,12 @@ function drawPolygon() {
             }
     canvas_context.fill();
     canvas_context.closePath();
-//    console.log(polygon);
 }
 
 
 function checkPoint() {
-    canvas_context.fillStyle = "gray"
-    canvas.addEventListener('click', clickToDrawPoint);
     canvas.addEventListener('click', sendAjax);
+//    canvas.addEventListener('click', clickToDrawPoint);
 }
 
 function sendAjax(){
@@ -49,7 +47,16 @@ function sendAjax(){
         data: JSON.stringify({'polygon': polygon,
                               'point': [x, y]}),
         success: function(response){
-            console.log(response)
+            point = response['point'];
+
+            canvas_context.beginPath();
+            canvas_context.arc(point[0], point[1], 5, 0, 2 * Math.PI, false)
+
+            if (response['check_polygon'])
+                    canvas_context.fillStyle = "#73AD21";
+                else
+                    canvas_context.fillStyle = "#FF0000";
+            canvas_context.fill();
         }
     });
 }
