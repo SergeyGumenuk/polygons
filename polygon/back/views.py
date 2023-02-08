@@ -1,6 +1,9 @@
 import json
 from django.http import JsonResponse, HttpResponse
 
+from back.models import Polygon
+from back.utils import base64_to_image
+
 
 def check_point(request):
     if request.method == 'POST':
@@ -25,10 +28,9 @@ def check_point(request):
         return HttpResponse(u'Запрос должен использовать метод POST')
 
 
-
-
-
-    #     print(data['polygon'])
-    #     print(data['point'])
-    #     return JsonResponse({'status': 200})
-    # return JsonResponse({'status': 'error'})
+def polygon_save(request):
+    data = json.load(request)
+    Polygon.objects.create(vertices=data['polygon_vertices'],
+                           image=base64_to_image(data['img']))
+    response = {'status': 'Полигон сохранен'}
+    return JsonResponse(response)

@@ -1,7 +1,10 @@
 var polygon = [];
+
 const btn_draw_polygon = document.querySelector('.draw_polygon');
 const btn_set_vertices = document.querySelector('.set_vertices');
 const btn_draw_points_to_check = document.querySelector('.draw_points');
+const btn_save_polygon = document.querySelector('.save_polygon');
+
 let canvas = document.getElementById('cvs');
 let canvas_context = canvas.getContext('2d');
 
@@ -9,6 +12,7 @@ let canvas_context = canvas.getContext('2d');
 btn_set_vertices.addEventListener('click', setVertices);
 btn_draw_polygon.addEventListener('click', drawPolygon);
 btn_draw_points_to_check.addEventListener('click', checkPoint);
+btn_save_polygon.addEventListener('click', ajaxToSavePolygon);
 
 
 function setVertices() {
@@ -59,6 +63,23 @@ function sendAjax(){
             canvas_context.fill();
         }
     });
+}
+
+
+function ajaxToSavePolygon() {
+        let image = canvas.toDataURL("image/png");
+
+        $.ajax({
+        url: 'back/polygon/save/',
+        type: 'POST',
+        headers: {"X-CSRFToken": getCookie("csrftoken")},
+        data: JSON.stringify({'polygon_vertices': polygon,
+                              'img': image}),
+        success: function(response){
+            alert(response['status'])
+        }
+        });
+
 }
 
 
