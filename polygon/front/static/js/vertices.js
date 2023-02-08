@@ -12,6 +12,7 @@ btn_draw_points_to_check.addEventListener('click', checkPoint);
 
 
 function setVertices() {
+    canvas.removeEventListener('click', sendAjax);
     canvas.addEventListener('click', clickToDrawVertex);
 }
 
@@ -26,62 +27,60 @@ function drawPolygon() {
             }
     canvas_context.fill();
     canvas_context.closePath();
-    console.log(polygon);
+//    console.log(polygon);
 }
 
 
 function checkPoint() {
     canvas_context.fillStyle = "gray"
     canvas.addEventListener('click', clickToDrawPoint);
+    canvas.addEventListener('click', sendAjax);
+}
+
+function sendAjax(){
+
+    var x = event.offsetX
+    var y = event.offsetY
+
+    $.ajax({
+        url: 'back/ajax/',
+        type: 'POST',
+        headers: {"X-CSRFToken": getCookie("csrftoken")},
+        data: JSON.stringify({'polygon': polygon,
+                              'point': [x, y]}),
+        success: function(response){
+            console.log(response)
+        }
+    });
 }
 
 
 function clickToDrawVertex(e){
+    canvas_context.fillStyle = "black"
     clickToDrawPoint(e);
     polygon.push([e.offsetX, e.offsetY]);
 }
 
 
 function clickToDrawPoint(e){
-        console.log(e.offsetX, e.offsetY);
+//        console.log(e.offsetX, e.offsetY);
         canvas_context.beginPath();
         canvas_context.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI, false);
         canvas_context.fill();
 }
 
 
-
-
-
-
-//function getCookie(name) {
-//  let cookieValue = null;
-//  if (document.cookie && document.cookie !== "") {
-//    const cookies = document.cookie.split(";");
-//    for (let i = 0; i < cookies.length; i++) {
-//      const cookie = cookies[i].trim();
-//      if (cookie.substring(0, name.length + 1) === (name + "=")) {
-//        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//        break;
-//      }
-//    }
-//  }
-//  return cookieValue;
-//}
-//
-//
-//$(document).ready(function(){
-//
-//    $('#cvs').click(function(){
-//        $.ajax({
-//            url: 'back/ajax/',
-//            type: 'POST',
-//            headers: {"X-CSRFToken": getCookie("csrftoken")},
-//            data: JSON.stringify({'polygon': polygon,
-//                                  'point': [100, 200]}),
-//            success: function(response){
-//                console.log(response)
-//            }
-//        });
-//    });
-//});
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + "=")) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
