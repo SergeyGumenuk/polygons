@@ -4,27 +4,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello, World!</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
 
+<body>
     <div class="wrapper">
-            <div class="container">
-                <nav class="menu">
-                    <a href="{% url 'front:index' %}">Перезагузить страницу</a>
-                    <input class="set_vertices" type="submit" value="Отметить вершины полигона">
-                    <input class="draw_polygon" type="submit" value="Нарисовать полигон">
-                    <input class="draw_points" type="submit" value="Рисовать точки">
-                    <input class="save_polygon" type="submit" value="Сохранить полигон">
-                </nav>
-                <div class="canvas">
-                    <canvas width="800" height="600" id="cvs"></canvas>
+    <div class="container">
+
+    <nav class="menu">
+        <a href="{% url 'front:index' %}">Перезагузить страницу</a>
+        <input class="set_vertices" type="submit" value="Отметить вершины полигона">
+        <input class="draw_polygon" type="submit" value="Нарисовать полигон">
+        <input class="draw_points" type="submit" value="Рисовать точки">
+        <input class="save_polygon" type="submit" value="Сохранить полигон">
+        <a href="#">Загрузить полигон</a>
+    </nav>
+    <div class="canvas">
+        <canvas width="990" height="400" id="cvs"></canvas>
+    </div>
+
+    <div class="polygons">
+      <div class="polygons__title">Нажмите на полигон для загрузки. (Тут должен быть слайдер)</div>
+        <div class="polygons__row">
+            {% for polygon in polygons %}
+            <div class="polygon__item item">
+                <div class="item__title">{{ polygon.vertices }}</div>
+                <div class="item__image">
+                    <img id="img" src="{{ polygon.image.url }}" alt="no image">
+                </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 
+    </div>
+    </div>
     <script src="{% static 'js/jquery-1.12.0.min.js' %}"></script>
     <script src="{% static 'js/vertices.js' %}"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

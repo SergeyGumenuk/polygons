@@ -16,6 +16,7 @@ btn_save_polygon.addEventListener('click', ajaxToSavePolygon);
 
 
 function setVertices() {
+    console.log('Hi')
     canvas.removeEventListener('click', sendAjax);
     canvas.addEventListener('click', clickToDrawVertex);
 }
@@ -37,6 +38,7 @@ function drawPolygon() {
 function checkPoint() {
     canvas.addEventListener('click', sendAjax);
 }
+
 
 function sendAjax(){
 

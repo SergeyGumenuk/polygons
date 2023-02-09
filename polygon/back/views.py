@@ -1,5 +1,6 @@
 import json
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.decorators.http import require_POST
 
 from back.models import Polygon
@@ -32,7 +33,12 @@ def polygon_save(request):
         return JsonResponse({'status': 'Canvas is empty'})
 
     Polygon.objects.create(vertices=data['polygon'],
+                           num_of_vertices=len(data['polygon']['vertices']),
                            image=base64_to_image(data['img']),
                            image_base_64=data['img'])
     response = {'status': 'Полигон сохранен'}
     return JsonResponse(response)
+
+
+def polygon_load(request):
+    ...

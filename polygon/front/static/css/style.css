@@ -7,3 +7,30 @@
 .canvas canvas{
     border: 1px solid black;
 }
+.polygons__title{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 20px 0 5px 0;
+}
+.polygons__row{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item{
+    flex: 0 1 33.1%;
+    border: 1px solid black;
+
+}
+
+.item__title{
+
+}
+.item__image{
+
+}
+.item__image img{
+    width: 100%;
+    border: 1px solid black;
+}

@@ -1,0 +1,18 @@
+{% extends 'front/base.html' %}
+
+{% block content %}
+
+    <div class="polygons">
+        <div class="polygons__row">
+            {% for polygon in polygons %}
+            <div class="polygon__item item">
+                <div class="item__title">{{ polygon.vertices }}</div>
+                <div class="item__image">
+                    <img src="{{ polygon.image.url }}" alt="no image">
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
