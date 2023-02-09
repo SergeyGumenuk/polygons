@@ -18,25 +18,48 @@
         <input class="draw_polygon" type="submit" value="Нарисовать полигон">
         <input class="draw_points" type="submit" value="Рисовать точки">
         <input class="save_polygon" type="submit" value="Сохранить полигон">
-        <a href="#">Загрузить полигон</a>
+<!--        <a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a>-->
     </nav>
     <div class="canvas">
         <canvas width="990" height="400" id="cvs"></canvas>
     </div>
-
-    <div class="polygons">
-      <div class="polygons__title">Нажмите на полигон для загрузки. (Тут должен быть слайдер)</div>
-        <div class="polygons__row">
-            {% for polygon in polygons %}
-            <div class="polygon__item item">
+    {% if polygon %}
+        <div class="polygon__item item">
                 <div class="item__title">{{ polygon.vertices }}</div>
                 <div class="item__image">
-                    <img id="img" src="{{ polygon.image.url }}" alt="no image">
+                    <img src="{{ polygon.image.url }}" alt="no image">
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    </div>
+        <script>
+            let pol = document.querySelector('.item');
+            pol.addEventListener('click', function(){
+                let poli = {{ polygon.vertices|safe }};
+                polygon = poli['vertices'];
+                console.log(polygon);
+                drawPolygon();
+            });
+        </script>
+    {% else %}
+        <div class="polygon__item item">
+                <div class="item__title"><a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a></div>
+                <div class="item__image">
+                    <img src="" alt="no image">
+                </div>
+            </div>
+    {% endif %}
+<!--    <div class="polygons">-->
+<!--      <div class="polygons__title">Нажмите на полигон для загрузки. (Тут должен быть слайдер)</div>-->
+<!--        <div class="polygons__row">-->
+<!--            {% for polygon in polygons %}-->
+<!--            <div class="polygon__item item">-->
+<!--                <div class="item__title">{{ polygon.vertices }}</div>-->
+<!--                <div class="item__image">-->
+<!--                    <img id="img" src="{{ polygon.image.url }}" alt="no image">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            {% endfor %}-->
+<!--        </div>-->
+<!--    </div>-->
 
     </div>
     </div>

@@ -5,6 +5,7 @@ const btn_set_vertices = document.querySelector('.set_vertices');
 const btn_draw_points_to_check = document.querySelector('.draw_points');
 const btn_save_polygon = document.querySelector('.save_polygon');
 
+
 let canvas = document.getElementById('cvs');
 let canvas_context = canvas.getContext('2d');
 
@@ -16,7 +17,6 @@ btn_save_polygon.addEventListener('click', ajaxToSavePolygon);
 
 
 function setVertices() {
-    console.log('Hi')
     canvas.removeEventListener('click', sendAjax);
     canvas.addEventListener('click', clickToDrawVertex);
 }

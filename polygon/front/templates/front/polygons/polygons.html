@@ -8,7 +8,7 @@
             <div class="polygon__item item">
                 <div class="item__title">{{ polygon.vertices }}</div>
                 <div class="item__image">
-                    <img src="{{ polygon.image.url }}" alt="no image">
+                    <a href="{% url 'front:index_with_polygon' polygon.id %}"><img src="{{ polygon.image.url }}" alt="no image"></a>
                 </div>
             </div>
             {% endfor %}
