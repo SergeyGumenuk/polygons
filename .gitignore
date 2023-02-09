@@ -1,8 +1,8 @@
-../.idea/
+.idea/
 
 ../.venv/
 
-media/
+polygon/media/
 
 __pycache__/
 
