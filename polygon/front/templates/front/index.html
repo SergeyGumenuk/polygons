@@ -10,44 +10,52 @@
 
 <body>
     <div class="wrapper">
-    <div class="container">
+        <nav class="menu">
+            <div class="container">
+                <div class="menu__body">
+                    <div class="menu__links">
+                        <a href="{% url 'front:index' %}">Главная страница</a>
+                        <a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a>
+                    </div>
+                    <div class="menu__btns">
+<!--                        <a href="#" class="set_vertices">Отметить вершины полигона</a>-->
+<!--                        <a href="#" class="draw_polygon">Нарисовать полигон</a>-->
+<!--                        <a href="#" class="draw_points">Рисовать точки</a>-->
+<!--                        <a href="#" class="save_polygon">Сохранить полигон</a>-->
+                        <input class="set_vertices" type="submit" value="Отметить вершины полигона">
+                        <input class="draw_polygon" type="submit" value="Нарисовать полигон">
+                        <input class="draw_points" type="submit" value="Рисовать точки">
+                        <input class="save_polygon" type="submit" value="Сохранить полигон">
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <div class="container">
+                <div class="canvas">
+                    <canvas width="990" height="400" id="cvs"></canvas>
+                </div>
+                {% if polygon %}
+                    <div class="polygon__item item">
+                        <div class="item__title">{{ polygon.vertices }}</div>
+                            <div class="item__image">
+                                <img src="{{ polygon.image.url }}" alt="no image">
+                            </div>
+                        </div>
+                        <script>
+                            let polygonObj = document.querySelector('.item');
+                            polygonObj.addEventListener('click', function(){
+                                let vertices = {{ polygon.vertices|safe }};
+                                polygon = vertices['vertices'];
+                                drawPolygon();
+                            });
+                        </script>
+                {% endif %}
+                </div>
+            </div>
+        </div>
 
-    <nav class="menu">
-        <a href="{% url 'front:index' %}">Перезагузить страницу</a>
-        <input class="set_vertices" type="submit" value="Отметить вершины полигона">
-        <input class="draw_polygon" type="submit" value="Нарисовать полигон">
-        <input class="draw_points" type="submit" value="Рисовать точки">
-        <input class="save_polygon" type="submit" value="Сохранить полигон">
-        <a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a>
-    </nav>
-    <div class="canvas">
-        <canvas width="990" height="400" id="cvs"></canvas>
-    </div>
-    {% if polygon %}
-        <div class="polygon__item item">
-                <div class="item__title">{{ polygon.vertices }}</div>
-                <div class="item__image">
-                    <img src="{{ polygon.image.url }}" alt="no image">
-                </div>
-            </div>
-        <script>
-            let polygonObj = document.querySelector('.item');
-            polygonObj.addEventListener('click', function(){
-                let vertices = {{ polygon.vertices|safe }};
-                polygon = vertices['vertices'];
-                drawPolygon();
-            });
-        </script>
-    {% else %}
-        <div class="polygon__item item">
-                <div class="item__title"><a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a></div>
-                <div class="item__image">
-                    <img src="" alt="no image">
-                </div>
-            </div>
-    {% endif %}
-    </div>
-    </div>
+
     <script src="{% static 'js/jquery-1.12.0.min.js' %}"></script>
     <script src="{% static 'js/vertices.js' %}"></script>
 </body>
