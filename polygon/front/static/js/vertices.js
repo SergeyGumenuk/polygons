@@ -30,6 +30,7 @@ function drawPolygon() {
                 else canvas_context.lineTo(point[0], point[1]);
                 canvas_context.stroke();
             }
+    canvas_context.fillStyle = 'black';
     canvas_context.fill();
     canvas_context.closePath();
 }
