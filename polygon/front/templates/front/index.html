@@ -11,6 +11,29 @@
 <body>
     <div class="wrapper">
         <nav class="menu">
+
+            <div class="header__burger">
+                <span></span>
+            </div>
+            <div class="burger__content">
+                <div class="content__list">
+                    <h3>Инструкция</h3>
+                    <ul>
+                        <li><p><h4>Отрисовка полигона.</h4>Для того, чтобы нарисовать полигон, нажмите на кнопку "Отметить вершины полигона". После чего нужно нажать "Сформировать полигон".</p></li>
+                    </ul>
+                    <ul>
+                        <li><p><h4>Проверить принадлежность точки.</h4>Нажмите на кнопку "Точки" и отмечайте их на канвасе кликом мыши.</p></li>
+                    </ul>
+                    <ul>
+                        <li><p><h4>Сохранение полигона.</h4> Чтобы сохранить полигон, сформируйте его на канвасе и нажмите "Сохранить полигон" </p></li>
+                    </ul>
+                    <ul>
+                        <li><p><h4>Загрузка полигона.</h4> Загрузка полигона происходит путем нажатия на кнопку "Загрузить полигон". После чего нобходимо выбрать полигон из списка предложенных. Затем на главное странице появится выбранный полигон, на который нужно нажать для его копирования на канвас. </p></li>
+                    </ul>
+                </div>
+            </div>
+
+
             <div class="container">
                 <div class="menu__body">
                     <div class="menu__links">
@@ -19,8 +42,8 @@
                     </div>
                     <div class="menu__btns">
                         <input class="set_vertices" type="submit" value="Отметить вершины полигона">
-                        <input class="draw_polygon" type="submit" value="Нарисовать полигон">
-                        <input class="draw_points" type="submit" value="Рисовать точки">
+                        <input class="draw_polygon" type="submit" value="Сформировать полигон">
+                        <input class="draw_points" type="submit" value="Точки">
                         <input class="save_polygon" type="submit" value="Сохранить полигон">
                     </div>
                 </div>
@@ -56,6 +79,7 @@
 
     <script src="{% static 'js/jquery-1.12.0.min.js' %}"></script>
     <script src="{% static 'js/vertices.js' %}"></script>
+    <script src="{% static 'js/burger.js' %}"></script>
 </body>
 </html>
 
