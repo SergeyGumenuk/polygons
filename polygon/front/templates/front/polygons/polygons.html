@@ -1,18 +1,30 @@
 {% extends 'front/base.html' %}
 
 {% block content %}
-
-    <div class="polygons">
-        <div class="polygons__row">
-            {% for polygon in polygons %}
-            <div class="polygon__item item">
-                <div class="item__title">{{ polygon.vertices }}</div>
-                <div class="item__image">
-                    <a href="{% url 'front:index_with_polygon' polygon.id %}"><img src="{{ polygon.image.url }}" alt="no image"></a>
+    <div class="polygons__page">
+        <div class="polygons__page__all">
+            <div class="polygons__row">
+                {% for polygon in page_obj %}
+                <div class="polygon__item item">
+                    <div class="item__title"></div>
+                    <div class="item__image">
+                        <a href="{% url 'front:index_with_polygon' polygon.id %}"><img src="{{ polygon.image.url }}" alt="no image"></a>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
 
+        <nav class="polygons__page__paginator">
+            <div class="container">
+                <ul class="paginator__list">
+                    {% for p in page_obj.paginator.page_range %}
+                        <li>
+                            <a href="?page={{ p }}">{{ p }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </nav>
+    </div>
 {% endblock %}

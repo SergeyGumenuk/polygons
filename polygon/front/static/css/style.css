@@ -221,3 +221,21 @@ button{
 .content__list p{
     font-size: 18px;
 }
+
+.paginator__list li{
+    margin: 25px 15px;
+    font-size: 25px;
+}
+
+
+.polygons__page__all{
+    margin: 60px 0 0 0;
+}
+.polygons__page__paginator{
+    position: absolute;
+    top: 470px;
+}
+
+.paginator__list{
+    display: flex;
+}
