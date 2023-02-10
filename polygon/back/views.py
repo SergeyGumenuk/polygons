@@ -1,6 +1,7 @@
 import json
+
+from django.db import IntegrityError
 from django.http import JsonResponse
-from django.shortcuts import render
 from django.views.decorators.http import require_POST
 
 from back.models import Polygon
@@ -27,18 +28,18 @@ def check_point(request):
     return JsonResponse(response)
 
 
+@require_POST
 def polygon_save(request):
     data = json.load(request)
     if not data['polygon']['vertices']:
         return JsonResponse({'status': 'Canvas is empty'})
 
-    Polygon.objects.create(vertices=data['polygon'],
-                           num_of_vertices=len(data['polygon']['vertices']),
-                           image=base64_to_image(data['img']),
-                           image_base_64=data['img'])
-    response = {'status': 'Полигон сохранен'}
-    return JsonResponse(response)
+    try:
+        Polygon.objects.create(vertices=data['polygon'],
+                               num_of_vertices=len(data['polygon']['vertices']),
+                               image=base64_to_image(data['img']),
+                               image_base_64=data['img'])
+    except IntegrityError:
+        return JsonResponse({'status': 'Такой полигон уже есть'})
 
-
-def polygon_load(request):
-    ...
+    return JsonResponse({'status': 'Полигон сохранен'})

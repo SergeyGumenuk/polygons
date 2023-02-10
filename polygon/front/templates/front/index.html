@@ -18,10 +18,6 @@
                         <a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a>
                     </div>
                     <div class="menu__btns">
-<!--                        <a href="#" class="set_vertices">Отметить вершины полигона</a>-->
-<!--                        <a href="#" class="draw_polygon">Нарисовать полигон</a>-->
-<!--                        <a href="#" class="draw_points">Рисовать точки</a>-->
-<!--                        <a href="#" class="save_polygon">Сохранить полигон</a>-->
                         <input class="set_vertices" type="submit" value="Отметить вершины полигона">
                         <input class="draw_polygon" type="submit" value="Нарисовать полигон">
                         <input class="draw_points" type="submit" value="Рисовать точки">
@@ -36,11 +32,13 @@
                     <canvas width="990" height="400" id="cvs"></canvas>
                 </div>
                 {% if polygon %}
-                    <div class="polygon__item item">
-                        <div class="item__title">{{ polygon.vertices }}</div>
-                            <div class="item__image">
-                                <img src="{{ polygon.image.url }}" alt="no image">
-                            </div>
+                    <div class="polygon__item item loaded_polygon">
+                        <div class="item__title">
+                            Нажмите на полигон для копирования
+                        </div>
+                        <div class="item__image">
+                            <img src="{{ polygon.image.url }}" alt="no image">
+                        </div>
                         </div>
                         <script>
                             let polygonObj = document.querySelector('.item');

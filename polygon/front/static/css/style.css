@@ -99,6 +99,12 @@ button{
     border: 1px solid black;
     border-radius: 5px;
 }
+.loaded_polygon{
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    width: 300px;
+}
 .polygons__title{
     font-size: 20px;
     font-weight: 600;
