@@ -10,3 +10,6 @@ class Polygon(models.Model):
 
     class Meta:
         ordering = ['num_of_vertices']
+
+    def __str__(self):
+        return f'Polygon with {self.num_of_vertices} vertices. Coordinates is {self.vertices["vertices"]}'

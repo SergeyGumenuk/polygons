@@ -21,6 +21,5 @@ def show_all_polygons(request):
     page_obj = paginator.get_page(page_num)
     return render(request,
                   'front/polygons/polygons.html',
-                  {'polygons': polygons,
-                   'page_obj': page_obj,
+                  {'page_obj': page_obj,
                    'title': 'Polygon select'})
