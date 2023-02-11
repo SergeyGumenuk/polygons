@@ -1,4 +1,5 @@
 var polygon = [];
+var csrf = $("input[name=csrfmiddlewaretoken]").val();
 
 const btn_draw_polygon = document.querySelector('.draw_polygon');
 const btn_set_vertices = document.querySelector('.set_vertices');
@@ -17,7 +18,7 @@ btn_save_polygon.addEventListener('click', ajaxToSavePolygon);
 
 
 function setVertices() {
-    canvas.removeEventListener('click', sendAjax);
+    canvas.removeEventListener('click', sendAjaxToCheckPoint);
     canvas.addEventListener('click', clickToDrawVertex);
 }
 
@@ -37,11 +38,11 @@ function drawPolygon() {
 
 
 function checkPoint() {
-    canvas.addEventListener('click', sendAjax);
+    canvas.addEventListener('click', sendAjaxToCheckPoint);
 }
 
 
-function sendAjax(){
+function sendAjaxToCheckPoint(){
 
     var x = event.offsetX
     var y = event.offsetY
@@ -49,7 +50,7 @@ function sendAjax(){
     $.ajax({
         url: 'back/ajax/',
         type: 'POST',
-        headers: {"X-CSRFToken": getCookie("csrftoken")},
+        headers: {"X-CSRFToken": csrf},
         data: JSON.stringify({'polygon': polygon,
                               'point': [x, y]}),
         success: function(response){
@@ -74,7 +75,7 @@ function ajaxToSavePolygon() {
         $.ajax({
         url: 'back/polygon/save/',
         type: 'POST',
-        headers: {"X-CSRFToken": getCookie("csrftoken")},
+        headers: {"X-CSRFToken": csrf},
         data: JSON.stringify({'polygon': {'vertices': polygon},
                               'img': image}),
         success: function(response){
@@ -96,20 +97,4 @@ function clickToDrawPoint(e){
     canvas_context.beginPath();
     canvas_context.arc(e.offsetX, e.offsetY, 5, 0, 2 * Math.PI, false);
     canvas_context.fill();
-}
-
-
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + "=")) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
 }

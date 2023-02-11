@@ -2,7 +2,7 @@ import json
 
 from django.db import IntegrityError
 from django.http import JsonResponse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_GET
 
 from back.models import Polygon
 from back.utils import base64_to_image

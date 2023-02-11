@@ -41,6 +41,7 @@
                         <a href="{% url 'front:show_all_polygons' %}">Загрузить полигон</a>
                     </div>
                     <div class="menu__btns">
+                        {% csrf_token %}
                         <input class="set_vertices" type="submit" value="Отметить вершины полигона">
                         <input class="draw_polygon" type="submit" value="Сформировать полигон">
                         <input class="draw_points" type="submit" value="Точки">
