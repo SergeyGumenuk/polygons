@@ -39,7 +39,8 @@ def polygon_save(request):
                                num_of_vertices=len(data['polygon']['vertices']),
                                image=base64_to_image(data['img']),
                                image_base_64=data['img'])
-    except IntegrityError:
-        return JsonResponse({'status': 'Такой полигон уже есть'})
+    except IntegrityError as e:
+        if 'UNIQUE constraint failed' in str(e):
+            return JsonResponse({'status': 'Такой полигон уже есть'})
 
     return JsonResponse({'status': 'Полигон сохранен'})
